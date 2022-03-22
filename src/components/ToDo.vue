@@ -2,7 +2,7 @@
   <div class="container">
     <h1>Welcome to my todo</h1>
 
-    <input type="text" v-model="task" placeholder="insert new task" />
+    <input type="text" v-model="task" placeholder="insert new task" v-on:keyup.enter="getTask()"/>
     <button @click="getTask()">add task</button>
 
     <div class="task" v-for="(toDo, i) in taskArr" :key="i" :class="isTaskCompleted(i) ? 'done' : ''">
@@ -12,7 +12,7 @@
 
       <div class="buttons">
         <div>
-          <button :class="isTaskCompleted(i) ? 'task-completed' : 'completed'" @click="completed(i)" >{{isTaskCompleted(i) ? 'task completed' : 'completed'}}</button>
+          <button :class="isTaskCompleted(i) ? 'task-completed' : 'complete'" @click="completed(i)" >{{isTaskCompleted(i) ? 'undone' : 'completed'}}</button>
         </div>
         <div>
           <button class="delete" @click="deleteTask(i)">delete</button>
@@ -31,24 +31,23 @@ export default {
       task: "",
       taskArr: [],
       selectedTasks: [],
-      
     };
   },
 
   methods: {
     getTask() {
       this.taskArr.push(this.task);
+      this.task= ""
     },
 
     completed(i) {
-      
+    
       if (this.isTaskCompleted(i)){
-           this.selectedTasks.splice(i, 1);
+        let restoredTask = this.selectedTasks.findIndex((n)=> n === i);
+        this.selectedTasks.splice(restoredTask,1);
       }else {
           this.selectedTasks.push(i);
       }
-    
-      
     },
 
     deleteTask(i) {
@@ -85,7 +84,7 @@ button {
 .text-container {
   min-width: 200px;
 }
-.completed {
+.complete {
   background-color: green;
 }
 .delete {
@@ -98,3 +97,6 @@ button {
     background-color: grey;
 }
 </style>
+
+
+
