@@ -2,17 +2,17 @@
   <div class="container">
     <h1>Welcome to my todo</h1>
 
-    <input type="text" v-model="task" placeholder="insert new task" v-on:keyup.enter="getTask()"/>
-    <button @click="getTask()">add task</button>
+    <input type="text" v-model="inputTask" placeholder="insert new task" v-on:keyup.enter="createTask()"/>
+    <button @click="createTask()">add task</button>
 
-    <div class="task" v-for="(toDo, i) in taskArr" :key="i" :class="isTaskCompleted(i) ? 'done' : ''">
+    <div class="task" v-for="(toDo, i) in taskArr" :key="i">
       <div class="text-container">
-        <h3>{{ toDo }}</h3>
+        <h3>{{ toDo.text }}</h3> <h3>{{ toDo.isCompleted }}</h3>
       </div>
 
       <div class="buttons">
         <div>
-          <button :class="isTaskCompleted(i) ? 'task-completed' : 'complete'" @click="completed(i)" >{{isTaskCompleted(i) ? 'undone' : 'completed'}}</button>
+          <button @click="toggleCompleted(toDo.id)" >{{isTaskCompleted(toDo.id) ? 'undone' : 'completed'}}</button>
         </div>
         <div>
           <button class="delete" @click="deleteTask(i)">delete</button>
@@ -28,39 +28,59 @@ export default {
 
   data() {
     return {
-      task: "",
+      inputTask: "",
       taskArr: [],
       selectedTasks: [],
     };
   },
 
   methods: {
-    getTask() {
-      this.taskArr.push(this.task);
-      this.task= ""
+    createTask() {
+     
+      const newTask = {
+        id: Math.random() *1000,
+        text: this.inputTask,
+        isCompleted : false
+      };
+      
+      this.taskArr.push(newTask);
+      this.inputTask= "";
     },
 
-    completed(i) {
+    toggleCompleted(id) {
+
+    this.selectedTasks = this.taskArr.filter((t)=> t.id == id);
     
-      if (this.isTaskCompleted(i)){
-        let restoredTask = this.selectedTasks.findIndex((n)=> n === i);
-        this.selectedTasks.splice(restoredTask,1);
-      }else {
-          this.selectedTasks.push(i);
+    for(let i = 0; i< this.selectedTasks.length; i++) {
+      
+      if(this.selectedTasks[i].isCompleted){
+        this.selectedTasks[i].isCompleted = false
+        
+      } else {
+        this.selectedTasks[i].isCompleted = true
+       
       }
+    }
+    
     },
 
     deleteTask(i) {
       this.taskArr.splice(i, 1);
     },
 
-     isTaskCompleted(i) {
-      
-      let isSelected = this.selectedTasks.find((task) => task == i);
 
-      return  (isSelected !== undefined ? true : false)
+     isTaskCompleted(id) {
+     
+           for(let i = 0; i < this.taskArr.length; i++) {
+             if (this.taskArr[i].id == id) {
+               console.log(this.taskArr[i].isCompleted,this.taskArr[i].text)
+               return this.taskArr[i].isCompleted
+             }
+           }
         
      },
+
+     
 
   },
 };
