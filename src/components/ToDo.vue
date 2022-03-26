@@ -24,18 +24,21 @@
 
       <div class="task" v-for="(toDo, i) in taskArr" :key="i">
         <div class="todo-container">
-          <button
-            @click="toggleCompleted(toDo.id)"
-            v-if="isTaskCompleted(toDo.id)"
-          >
-            <img src="src/assets/img/taskCompleted.svg" alt="" />
-          </button>
-          <button v-else
-            @click="toggleCompleted(toDo.id)"
-          
-          >
-            <img src="src/assets/img/completeTask.svg" alt="" />
-          </button>
+          <div class="button">
+            <button
+              @click="toggleCompleted(toDo.id)"
+              v-if="isTaskCompleted(toDo.id)"
+            >
+              <img src="src/assets/img/taskCompleted.svg" alt="" />
+            </button>
+
+            <button v-else
+              @click="toggleCompleted(toDo.id)"
+            >
+              <img src="src/assets/img/completeTask.svg" alt="" />
+            </button>
+
+          </div>
 
           <div class="text-container">
             <h3 :class="isTaskCompleted(toDo.id) ? 'completed-task' : ''">
@@ -44,7 +47,7 @@
           </div>
         </div>
 
-        <div class="delete">
+        <div class="button, delete">
           <button @click="deleteTask(i)">
             <img src="src/assets/img/trash.svg" alt="" />
           </button>
@@ -165,6 +168,8 @@ input {
 
 button {
   all: unset;
+  height: 40px;
+  cursor: pointer;
 }
 
 .add-task-btn {
@@ -185,6 +190,7 @@ button {
   h3 {
      font-size: 20px;
   } 
+  transition: all 2s;
 }
 
 .task-count {
@@ -193,11 +199,6 @@ button {
   margin-left: 10px;
   font-weight: bold;
   font-size: 20px;
-  transition: display 0.9s;
-}
-
-.buttons {
-  display: flex;
 }
 
 .text-container {
@@ -209,33 +210,25 @@ button {
 
 .todo-container {
   display: flex;
-  margin-left: 5px; 
-}
-
-.complete {
-  background-color: green;
+  align-items: center;
+  margin-left: 10px; 
 }
 
 .delete {
   align-self: center;
-  margin-right: 5px;
-  transition: display 0.9s;
-  display: none;
+  margin-right: 10px;
+  height: 40px;
+  display: none; 
+}
+
+.button {
+  height: 40px;
 }
 
 .task:hover {
   .delete {
     display: block;
   }
-  
-}
-
-.done {
-  background-color: grey;
-}
-
-.task-completed {
-  background-color: grey;
 }
 
 .completed-task {
