@@ -4,10 +4,10 @@
       <img src="src/assets/img/myToDoLogo.svg" alt="" />
     </nav>
     <main>
-      <div class="title">
+      <!-- <div class="title">
         <img src="src/assets/img/tasksIcon.svg" alt="" />
         <h2>Tasks</h2>
-      </div>
+      </div> -->
       <div class="input-container">
         <input
           type="text"
@@ -27,17 +27,9 @@
           <div class="button">
             <button
               @click="toggleCompleted(toDo.id)"
-              v-if="isTaskCompleted(toDo.id)"
             >
-              <img src="src/assets/img/taskCompleted.svg" alt="" />
+              <img :src="isTaskCompleted(toDo.id) ? 'src/assets/img/taskCompleted.svg' : 'src/assets/img/completeTask.svg'" alt="" />
             </button>
-
-            <button v-else
-              @click="toggleCompleted(toDo.id)"
-            >
-              <img src="src/assets/img/completeTask.svg" alt="" />
-            </button>
-
           </div>
 
           <div class="text-container">
@@ -129,11 +121,14 @@ nav {
   display: flex;
   align-items: center;
   border-bottom: 2px solid #474849;
+  padding-left: 10px;
 }
 
 main {
   max-width: 700px;
   margin: 0 auto;
+  padding: 0 10px
+  ;
 }
 
 .title {
@@ -164,6 +159,7 @@ input {
 
 .input-container {
   position: relative;
+  margin-top: 100PX;;
 }
 
 button {
@@ -194,7 +190,7 @@ button {
 }
 
 .task-count {
-  margin-top: 80px;
+  margin-top: 30px;
   margin-bottom: 30px;
   margin-left: 10px;
   font-weight: bold;
@@ -218,6 +214,9 @@ button {
   align-self: center;
   margin-right: 10px;
   height: 40px;
+  position: absolute;
+  top: auto;
+  right: 0;
   display: none; 
 }
 
