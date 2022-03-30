@@ -1,7 +1,7 @@
 <template>
   <div class="container">
     <nav>
-      <img src="src/assets/img/myToDoLogo.svg" alt="" />
+      <img src="/src/assets/img/myToDoLogo.svg" alt="" />
     </nav>
     <main>
       <!-- <div class="title">
@@ -17,7 +17,7 @@
         />
 
         <button class="add-task-btn" @click="createTask()">
-          <img src="src/assets/img/addTask.svg" alt="" />
+          <img src="/src/assets/img/addTask.svg" alt="" />
         </button>
       </div>
       <div class="task-count">Remaining tasks: {{ taskArr.length }}</div>
@@ -28,7 +28,7 @@
             <button
               @click="toggleCompleted(toDo.id)"
             >
-              <img :src="isTaskCompleted(toDo.id) ? 'src/assets/img/taskCompleted.svg' : 'src/assets/img/completeTask.svg'" alt="" />
+              <img :src="isTaskCompleted(toDo.id) ? '/src/assets/img/taskCompleted.svg' : '/src/assets/img/completeTask.svg'" alt="" />
             </button>
           </div>
 
@@ -41,7 +41,7 @@
 
         <div class="button, delete">
           <button @click="deleteTask(i)">
-            <img src="src/assets/img/trash.svg" alt="" />
+            <img src="/src/assets/img/trash.svg" alt="" />
           </button>
         </div>
       </div>
