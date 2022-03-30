@@ -28,7 +28,7 @@
             <button
               @click="toggleCompleted(toDo.id)"
             >
-              <img :src="isTaskCompleted(toDo.id) ? '/src/assets/img/taskCompleted.svg' : '/src/assets/img/completeTask.svg'" alt="" />
+              <img :src='isTaskCompleted(toDo.id) ? "/src/assets/img/taskCompleted.svg" : "/src/assets/img/completeTask.svg"' alt="" />
             </button>
           </div>
 
